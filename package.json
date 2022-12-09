@@ -1,0 +1,26 @@
+{
+  "name": "schedule-tip-generator",
+  "version": "1.0.0",
+  "description": "Schedule tip generator for Constellation Coffee La Canada location.",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkang611/schedule-tip-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tkang611/schedule-tip-generator/issues"
+  },
+  "homepage": "https://github.com/tkang611/schedule-tip-generator#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
