@@ -1,24 +1,19 @@
-const express = require('express')
+const path = require('path');
+const express = require('express');
 const app = express();
-app.use(express.json());
 
-app.use('/', (req, res) => {
-    res.status(200).json('testing?')
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// app.use('/build', express.static(path.join(__dirname, '../build')));
+
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../src/index.html')); 
 })
 
-//global error handler
-app.use((err, req, res, next) => {
-    const errObj = {
-      log: 'global error handler invoked',
-      status: 400,
-      message: err,
-    };
-    if (err.name === 'InvalidParameterCombinationException') {
-      errObj.tooManyDatapoints = true;
-    }
-    return res.status(errObj.status).json(errObj);
-  })
-  
-  app.listen(3000, () => {
-    console.log('Listening on port: 3000.')
-  })
+app.listen(3000, () => {
+  console.log('listening on port 3000');
+})
+
+
+module.exports = app;
