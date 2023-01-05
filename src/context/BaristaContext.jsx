@@ -7,7 +7,7 @@ const defaultState = {
     breakTime: 0,
 }
 
-export const BaristaContext = React.createContext(defaultState);
+const BaristaContext = React.createContext(defaultState);
 
 const BaristaContextProvider = ({children}) => {
     const [barista, setBarista] = React.useState('');
@@ -33,6 +33,6 @@ const BaristaContextProvider = ({children}) => {
     )
 }
 
-export const useBaristaContext = React.useContext(BaristaContext)
+export const useBaristaContext = () => React.useContext(BaristaContext)
 
 export default BaristaContextProvider;

@@ -1,11 +1,10 @@
 import React from "react";
-// import Calculator from "./components/Calculator.jsx";
+import Calculator from "./containers/Calculator.jsx";
 
 const App = () => {
   return (
     <div id="main-container">
-      if you can see this, you are showing React content HELLO
-        {/* <Calculator /> */}
+        <Calculator />
     </div>
   )
 }

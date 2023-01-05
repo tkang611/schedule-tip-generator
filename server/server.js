@@ -5,8 +5,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use('/build', express.static(path.join(__dirname, '../build')));
-
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../src/index.html')); 
 })
@@ -14,6 +12,5 @@ app.get('/', (req, res) => {
 app.listen(3000, () => {
   console.log('listening on port 3000');
 })
-
 
 module.exports = app;

@@ -2,12 +2,12 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // entry: path.join(__dirname, "./src/main.js"),
   entry: "./src/main.js",
   devtool: 'inline-source-map',
   output: {
-    path: path.resolve(__dirname, "/build"),
+    path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   mode: "development",
   module: {
@@ -15,10 +15,11 @@ module.exports = {
       {
         test: /.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          // presets: ['@babel/env', '@babel/react']
-          presets: ["@babel/preset-env", "@babel/preset-react"],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
         }
       },
       {

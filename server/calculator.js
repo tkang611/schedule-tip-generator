@@ -1,5 +1,3 @@
-
-
 const lcSchedule = {
     0 : [
       { name: 'Eli',
