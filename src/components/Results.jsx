@@ -5,7 +5,9 @@ const Results = () => {
 
 
   return(
-
+    <div id="totals-container">
+      this is the where the results will go
+    </div>
   )
 }
 
