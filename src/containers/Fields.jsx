@@ -4,7 +4,7 @@ import Totals from "../components/Totals";
 
 const Fields = () => {
   return (
-    <div id="fields-container" className="flex flex-row">
+    <div id="fields-container" className="flex justify-around">
       <Baristas />
       <Totals />
     </div>

@@ -1,15 +1,30 @@
 import * as React from "react";
 import { TextField } from "@mui/material";
-import { useBaristaContext } from "../context/BaristaContext.jsx";
+import { useTotalsContext } from "../context/TotalsContext";
 
 const Totals = () => {
 
   return( 
-    <div className="flex flex-col text-sm">
-      <h1>Totals</h1>
-      <TextField label="Total Cash" variant="outlined"></TextField>
-      <TextField label="Tip" variant="outlined"></TextField>
-      <TextField label="Cash Tip" variant="outlined"></TextField>
+    <div className="flex flex-col">
+      <h1 className="flex justify-center mt-3">Totals</h1>
+      <TextField 
+      label="Total Cash" 
+      variant="outlined" 
+      sx={{
+        my: 2
+      }} />
+      <TextField 
+      label="Card Tip" 
+      variant="outlined" 
+      sx={{
+        mb: 2
+      }} />
+      <TextField 
+      label="Cash Tip" 
+      variant="outlined" 
+      sx={{
+
+      }} />
     </div>    
   )
 }

@@ -5,7 +5,7 @@ const Results = () => {
 
 
   return(
-    <div id="totals-container">
+    <div className="mt-20 flex justify-center">
       this is the where the results will go
     </div>
   )
