@@ -3,7 +3,7 @@ import * as React from 'react';
 const defaultState = {
   total: 0,
   cardTotal: 0,
-  cashTotal
+  cashTotal: 0
 }
 
 const TotalsContext = React.createContext(defaultState);
