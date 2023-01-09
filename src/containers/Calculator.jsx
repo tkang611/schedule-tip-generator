@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useBaristaContext } from "../context/BaristaContext.jsx";
 import Fields from "./Fields";
 import Results from "../components/Results";
 import CalculateButton from "../components/Button.jsx";

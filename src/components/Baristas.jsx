@@ -1,8 +1,6 @@
 import * as React from "react";
-import { useBaristaContext } from "../context/BaristaContext.jsx";
 import { useBaristasContext} from "../context/BaristasContext.jsx"
-import { TextField, Select, MenuItem, InputLabel } from "@mui/material";
-import { Button } from "@mui/material";
+import { TextField, MenuItem, Button } from "@mui/material";
 
 const Baristas = () => {
 
@@ -19,73 +17,44 @@ const Baristas = () => {
       endTime: endTime,
       breakTime: breakTime
     };
-  
-    setBaristas((prev) => [...prev, newBarista]);   
+    // check if there are already more than 5 baristas in the array
+    if(baristas.length >= 5) {
+      alert('Too many baristas breh.')
+    }
+    // check if any of the fields are empty
+    else if(newBarista.barista === "" || newBarista.startTime === "" || newBarista.endTime === "") {
+      alert('You left a field empty breh.')
+    }
+    // check if the barista already exists in the baristas array
+    else if(baristas.some(e => e.barista.includes(newBarista.barista))){
+      alert('You already have this barista breh.')
+    }
+    // if all checks out, add the new barista to the baristas array
+    else {
+      setBaristas((prev) => [...prev, newBarista]);   
+    }
   }
 
-  const baristaNames = ['Tim', 'Sung', 'Jess', 'Will', 'Eli', 'Nicole'];
+  let baristaNames = ['Tim', 'Sung', 'Jess', 'Will', 'Eli', 'Nicole'];
 
   return(
     <div className="flex flex-col">
-      <h1 className="flex justify-center my-3">Baristas</h1>
-      {baristas.map((el) => {
-        return(
-          <Select value={el.barista}>
-            {baristaNames.map((barista) => (
-              <MenuItem value={barista} onClick={() => setBarista(barista)}>{barista}</MenuItem>
-            ))}
-          </Select>
-        )
-      })}
+      <h1 className="flex justify-center mt-3">Barista</h1>
+        <TextField select label="Name" value={barista} id="name-input" sx={{width: '223px', my: 2}}>
+          {baristaNames.map((baristaName) => (
+            <MenuItem key={baristaName} value={baristaName} onClick={() => setBarista(baristaName)}>
+              {baristaName}
+            </MenuItem>
+          ))}
+        </TextField> 
 
-      <InputLabel id="barista-name">Name</InputLabel>
-      <Select id="barista-name" sx={{width:'223px'}}>
-        {baristaNames.map((barista) => (
-          <MenuItem value={barista} onClick={() => setBarista(barista)}>{barista}</MenuItem>
-        ))}
-      </Select>
-
-      {/* <TextField 
-        label="Name"
-        variant="outlined"
-        onChange={(e) => setBarista(e.target.value)}
-        sx={{mb: 2}}
-      /> */}
+      <TextField onChange={(e) => setStartTime(e.target.value)} label="Start Time: 830a" sx={{mb: 2}}/>
+      <TextField onChange={(e) => setEndTime(e.target.value)} label="End Time: 1230p" sx={{mb: 2}}/>
+      <TextField onChange={(e) => setBreakTime(e.target.value)} label="Break Time: 30/0" sx={{mb: 2}}/>
 
       <Button variant="contained" onClick={handleSubmit}>Add Barista</Button>
-
     </div>
   )
-
-  // return(
-  //   <div className="field-container flex flex-col">
-  //     <h1 className="flex justify-center mt-3">Baristas</h1>
-  //     <TextField 
-  //       label="Name" 
-  //       variant="outlined" 
-  //       sx={{
-  //         my: 2
-  //       }} />
-  //     <TextField 
-  //       label="Name" 
-  //       variant="outlined" 
-  //       sx={{
-  //         mb: 2
-  //       }} />
-  //     <TextField 
-  //       label="Name" 
-  //       variant="outlined" 
-  //       sx={{
-  //         mb: 2
-  //       }} />
-  //     <TextField 
-  //       label="Name" 
-  //       variant="outlined" 
-  //       sx={{
-
-  //       }} />
-  //   </div>
-  // )
 }
 
 export default Baristas;
