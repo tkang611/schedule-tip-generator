@@ -52,7 +52,7 @@ const Baristas = () => {
       <TextField onChange={(e) => setEndTime(e.target.value)} label="End Time: 1230p" sx={{mb: 2}}/>
       <TextField onChange={(e) => setBreakTime(e.target.value)} label="Break Time: 30/0" sx={{mb: 2}}/>
 
-      <Button variant="contained" onClick={handleSubmit}>Add Barista</Button>
+      <Button variant="contained" onClick={() => {handleSubmit()}}>Add Barista</Button>
     </div>
   )
 }
