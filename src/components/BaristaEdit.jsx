@@ -5,10 +5,10 @@ import { TextField, MenuItem, Button } from "@mui/material";
 const BaristaEdit = ({baristaToEdit}) => {
 
   const { baristas, setBaristas } = useBaristasContext();
-  const [barista, setBarista] = React.useState('');
-  const [startTime, setStartTime] = React.useState('');
-  const [endTime, setEndTime] = React.useState('');
-  const [breakTime, setBreakTime] = React.useState(0);
+  const [barista, setBarista] = React.useState(baristaToEdit.barista);
+  const [startTime, setStartTime] = React.useState(baristaToEdit.startTime);
+  const [endTime, setEndTime] = React.useState(baristaToEdit.endTime);
+  const [breakTime, setBreakTime] = React.useState(baristaToEdit.breakTime);
 
   async function handleSubmit() {
     const editedBarista = {
@@ -26,12 +26,12 @@ const BaristaEdit = ({baristaToEdit}) => {
       alert('You left a field empty breh.')
     }
     // check if the barista already exists in the baristas array
-    else if(baristaToEdit !== editedBarista.barista && baristas.some(e => e.barista.includes(editedBarista.barista))){
+    else if(baristaToEdit.barista !== editedBarista.barista && baristas.some(e => e.barista.includes(editedBarista.barista))){
       alert('You already have this barista breh.')
     }
     // if all checks out, add the new barista to the baristas array
     else {
-      const editedBaristaList = baristas.filter(e => e.barista !== baristaToEdit)
+      const editedBaristaList = baristas.filter(e => e.barista !== baristaToEdit.barista)
       console.log("before: ", editedBaristaList)
       editedBaristaList.push(editedBarista)
       console.log("after: ", editedBaristaList)

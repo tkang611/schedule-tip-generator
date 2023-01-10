@@ -24,7 +24,7 @@ const BaristaComponent = ({baristaComp}) => {
             <b>{baristaComp.barista}</b> 
           </Typography>
           <Typography sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', width: '65%'}}>
-            {baristaComp.startTime} - {baristaComp.endTime} {baristaComp.breakTime} minute break.
+            {baristaComp.startTime} - {baristaComp.endTime} {"\n"} {baristaComp.breakTime} minute break.
           </Typography>
 
           <IconButton onClick={() => handleDelete(baristaComp.barista)}>
@@ -34,7 +34,7 @@ const BaristaComponent = ({baristaComp}) => {
 
         <AccordionDetails>
           <hr className="mb-3"/>
-          <BaristaEdit baristaToEdit={baristaComp.barista}/>
+          <BaristaEdit baristaToEdit={baristaComp}/>
         </AccordionDetails>
       </Accordion>
     </div>
