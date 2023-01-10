@@ -10,7 +10,7 @@ const BaristaEdit = ({baristaToEdit}) => {
   const [endTime, setEndTime] = React.useState(baristaToEdit.endTime);
   const [breakTime, setBreakTime] = React.useState(baristaToEdit.breakTime);
 
-  async function handleSubmit() {
+  async function handleEdit() {
     const editedBarista = {
       barista: barista,
       startTime: startTime,
@@ -31,12 +31,11 @@ const BaristaEdit = ({baristaToEdit}) => {
     }
     // if all checks out, add the new barista to the baristas array
     else {
-      const editedBaristaList = baristas.filter(e => e.barista !== baristaToEdit.barista)
-      console.log("before: ", editedBaristaList)
-      editedBaristaList.push(editedBarista)
-      console.log("after: ", editedBaristaList)
+      const baristaIndex = baristas.findIndex(e => e.barista === baristaToEdit.barista);
+      const editedBaristaArr = [...baristas];
+      editedBaristaArr[baristaIndex] = editedBarista;
 
-      setBaristas(editedBaristaList);   
+      setBaristas(editedBaristaArr);   
     }
   }
 
@@ -81,7 +80,7 @@ const BaristaEdit = ({baristaToEdit}) => {
         ))}
       </TextField>
 
-      <Button variant="contained" onClick={() => {handleSubmit()}}><b>Edit Barista</b></Button>
+      <Button variant="contained" onClick={() => {handleEdit()}}><b>Edit Barista</b></Button>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import * as React from "react";
-import BaristasCreate from "../components/BaristaCreate";
-import BaristasList from "../components/BaristaList"
+import BaristaCreate from "../components/BaristaCreate";
+import BaristaList from "../components/BaristaList"
 import Totals from "../components/Totals";
 import { useBaristasContext } from "../context/BaristasContext.jsx";
 
@@ -10,8 +10,8 @@ const Fields = () => {
 
   return (
     <div id="fields-container" className="flex justify-around">
-      <BaristasCreate />
-      <BaristasList baristasList={baristas}/>
+      <BaristaCreate />
+      <BaristaList baristasList={baristas}/>
       <Totals />
     </div>
   )
