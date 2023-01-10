@@ -4,7 +4,7 @@
   "description": "Schedule tip generator for Constellation Coffee La Canada location.",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "nodemon ./server/server.js",
     "build": "export NODE_ENV=production && webpack",
     "dev": "concurrently \"nodemon ./server/server.js\" \"webpack-dev-server --mode development --open --hot\""
   },

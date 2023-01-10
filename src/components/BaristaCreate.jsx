@@ -36,12 +36,12 @@ const Baristas = () => {
   }
 
   const baristaNames = ['Tim', 'Sung', 'Jess', 'Will', 'Eli', 'Nicole'];
-  const times = ['6:30 AM', '7:45 AM', '8:00 AM', '8:15 AM', '9:00 AM', '12:00 PM', '12:30 PM', '5:30 PM'];
+  const times = ['6:30 AM', '7:45 AM', '8:00 AM', '8:15 AM', '9:00 AM', '12:00 PM', '12:30 PM', '1:30 PM', '5:30 PM'];
   const breakTimes = [0, 30, 60];
 
   return(
     <div className="flex flex-col w-56">
-      <h1 className="flex justify-center mt-3">Barista</h1>
+      <h1 className="flex justify-center mt-7 mb-2 text-xl">Add Barista</h1>
         <TextField select label="Name" value={barista} sx={{ my: 2}}>
           {baristaNames.map((baristaName) => (
             <MenuItem key={baristaName} value={baristaName} onClick={() => setBarista(baristaName)}>

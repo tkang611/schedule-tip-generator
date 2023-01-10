@@ -12,14 +12,14 @@ const BaristaComponent = ({baristaComp}) => {
   }
 
   return(
-    <div className="w-72 border rounded-[4px] mb-3 color-[#C4C4C4]">
+    <div className="w-[23rem] border rounded-[4px] mb-3 color-[#C4C4C4]">
       <Accordion sx={{width: '100%'}}> 
-        <AccordionSummary> 
-          <Typography sx={{display: 'flex', width: '25%', alignItems: 'center', alignContent: 'center'}}>
+        <AccordionSummary sx={{paddingRight: '1rem'}}> 
+          <Typography sx={{display: 'flex', width: '18%', alignItems: 'center', alignContent: 'center'}}>
             <b>{baristaComp.barista}</b> 
           </Typography>
-          <Typography sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', width: '65%'}}>
-            {baristaComp.startTime} - {baristaComp.endTime} {"\n"} {baristaComp.breakTime} minute break.
+          <Typography sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', width: '70%'}}>
+            {baristaComp.startTime} - {baristaComp.endTime} - {baristaComp.breakTime} break.
           </Typography>
 
           <IconButton onClick={() => handleDelete(baristaComp.barista)}>

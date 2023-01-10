@@ -40,7 +40,7 @@ const BaristaEdit = ({baristaToEdit}) => {
   }
 
   let baristaNames = ['Tim', 'Sung', 'Jess', 'Will', 'Eli', 'Nicole'];
-  const times = ['6:30 AM', '7:45 AM', '8:00 AM', '8:15 AM', '9:00 AM', '12:00 PM', '12:30 PM', '5:30 PM'];
+  const times = ['6:30 AM', '7:45 AM', '8:00 AM', '8:15 AM', '9:00 AM', '12:00 PM', '12:30 PM', '1:30 PM', '5:30 PM'];
   const breakTimes = [0, 30, 60];
 
   return(

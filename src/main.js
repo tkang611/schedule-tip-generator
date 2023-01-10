@@ -4,6 +4,7 @@ import TotalsContextProvider from "./context/TotalsContext.jsx";
 import BaristasContextProvider from "./context/BaristasContext.jsx";
 import App from './app.jsx';
 import './index.css'
+import './styles.css'
 
 let root = createRoot(document.getElementById('root'));
 

@@ -6,7 +6,7 @@ const Totals = () => {
 
   return( 
     <div className="flex flex-col">
-      <h1 className="flex justify-center mt-3">Totals</h1>
+      <h1 className="flex justify-center mt-7 mb-2 text-xl">Totals</h1>
       <TextField 
       label="Total Cash" 
       variant="outlined" 
