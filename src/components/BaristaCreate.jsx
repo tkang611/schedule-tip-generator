@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useBaristasContext} from "../context/BaristasContext.jsx"
+import { useBaristasContext } from "../context/BaristasContext.jsx"
 import { TextField, MenuItem, Button } from "@mui/material";
 
 const Baristas = () => {
@@ -8,7 +8,7 @@ const Baristas = () => {
   const [barista, setBarista] = React.useState('');
   const [startTime, setStartTime] = React.useState('');
   const [endTime, setEndTime] = React.useState('');
-  const [breakTime, setBreakTime] = React.useState(0);
+  const [breakTime, setBreakTime] = React.useState('');
 
   const handleSubmit = () => {
     const newBarista = {
@@ -35,12 +35,14 @@ const Baristas = () => {
     }
   }
 
-  let baristaNames = ['Tim', 'Sung', 'Jess', 'Will', 'Eli', 'Nicole'];
+  const baristaNames = ['Tim', 'Sung', 'Jess', 'Will', 'Eli', 'Nicole'];
+  const times = ['6:30 AM', '7:45 AM', '8:00 AM', '8:15 AM', '9:00 AM', '12:00 PM', '12:30 PM', '5:30 PM'];
+  const breakTimes = [0, 30, 60];
 
   return(
-    <div className="flex flex-col">
+    <div className="flex flex-col w-56">
       <h1 className="flex justify-center mt-3">Barista</h1>
-        <TextField select label="Name" value={barista} id="name-input" sx={{width: '223px', my: 2}}>
+        <TextField select label="Name" value={barista} sx={{ my: 2}}>
           {baristaNames.map((baristaName) => (
             <MenuItem key={baristaName} value={baristaName} onClick={() => setBarista(baristaName)}>
               {baristaName}
@@ -48,9 +50,30 @@ const Baristas = () => {
           ))}
         </TextField> 
 
-      <TextField onChange={(e) => setStartTime(e.target.value)} label="Start Time: 830a" sx={{mb: 2}}/>
-      <TextField onChange={(e) => setEndTime(e.target.value)} label="End Time: 1230p" sx={{mb: 2}}/>
-      <TextField onChange={(e) => setBreakTime(e.target.value)} label="Break Time: 30/0" sx={{mb: 2}}/>
+
+      <TextField select label="Start Time" value={startTime} sx={{mb: 2}}>
+        {times.map((startTime, index) => (
+          <MenuItem key={index} value={startTime} onClick={() => setStartTime(startTime)}>
+            {startTime}
+          </MenuItem>
+        ))}
+      </TextField> 
+
+      <TextField select label="End Time" value={endTime} sx={{mb: 2}}>
+        {times.map((endTime, index) => (
+          <MenuItem key={`${endTime} ${index}`} value={endTime} onClick={() => setEndTime(endTime)}>
+            {endTime}
+          </MenuItem>
+        ))}
+      </TextField> 
+
+      <TextField select label="Break Time" value={breakTime} sx={{mb: 2}}>
+        {breakTimes.map((breakTime) => (
+          <MenuItem key={breakTime} value={breakTime} onClick={() => setBreakTime(breakTime)}>
+            {breakTime}
+          </MenuItem>
+        ))}
+      </TextField>
 
       <Button variant="contained" onClick={() => {handleSubmit()}}>Add Barista</Button>
     </div>
