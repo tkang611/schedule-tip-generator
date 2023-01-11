@@ -6,19 +6,20 @@ import { useBaristasContext } from '../context/BaristasContext.jsx';
 
 const CalculateTip = () => {
 
-  const {baristas} = useBaristasContext();
+  const { baristas } = useBaristasContext();
   const deposit = useTotalsContext();
+  const { distribution, setDistribution } = useTotalsContext();
 
   const parseShifts = (time) => {
     let theTime = time.replace(/:/g, "")
     theTime = theTime.replace(/\s/g, "")
-    // const theNewTime = theTime.substring(0, theTime.length-2) + theTime.substring(theTime.length-2,theTime.length-1).toLowerCase();
+    const theNewTime = theTime.substring(0, theTime.length-2) + theTime.substring(theTime.length-2,theTime.length-1).toLowerCase();
 
     let timeInNums = time.replace(/:/g, "")
     timeInNums = timeInNums.substring(0, timeInNums.length-3);
     
     const onlyHr = Math.floor(Number(timeInNums/100))
-    const amOrPm = onlyHr === 12 ? onlyHr + time.substring(time.length-1,time.length-2).toLowerCase() : time.substring(time.length-2, 6).toLowerCase();
+    const amOrPm = onlyHr === 12 ? onlyHr + theNewTime.slice(theNewTime.length-1) : theNewTime.slice(theNewTime.length-1)
 
     let result;
     if (amOrPm === 'a' || amOrPm === '12p'){
@@ -33,17 +34,14 @@ const CalculateTip = () => {
     const startTime = parseShifts(start);
     const endTime = parseShifts(end);
     const totalMins = (Math.floor(endTime/100) + (endTime % 100)/60) - (Math.floor(startTime/100) + (startTime % 100)/60)
-    console.log('hours per shift: ', hrsPerShift);
-    console.log('total mins: ', totalMins)
     return totalMins - br/60;
   };
   
   const lcDeposit = (total, cardTotal, cashTotal) => {
     const tipsBreakdown = {};
     const kevin = Number(Number(total - (cardTotal * 0.9)).toFixed(2));
-    const tips = (cardTotal * 0.9) + cashTotal;
+    const tips = (cardTotal * 0.9) + Number(cashTotal);
     
-    console.log(baristas)
     baristas.map((e) => {
       const barista = e.barista;
       const startTime = e.startTime;
@@ -53,10 +51,9 @@ const CalculateTip = () => {
     })
 
     const hrsArr = Object.values(tipsBreakdown);
-    console.log(tipsBreakdown)
     const totalHrs = hrsArr.reduce((a,b) => a + b, 0)
-    const tipsPerHr = Number(Number(tips/totalHrs).toFixed(2));
-    
+    const tipsPerHr = (tips/totalHrs).toFixed(2);
+ 
     const tipsPerEmployee = hrsArr.map(el=> Number(Number(el*tipsPerHr).toFixed(2)));
     const todaysNames = Object.keys(tipsBreakdown);
     const employeeToTips = {};
@@ -64,14 +61,15 @@ const CalculateTip = () => {
       employeeToTips[todaysNames[i]] = tipsPerEmployee[i];
     };
 
+    setDistribution(employeeToTips);
+    console.log('employee tips:', employeeToTips);
     const result = `Deposit: ${kevin}, Tips: ${tips}, Hourly: ${tipsPerHr}`;
     return result;
   }
 
   const handleCalculate = () => {
-    
     const calculateDeposit = lcDeposit(deposit.total, deposit.cardTotal, deposit.cashTotal);
-    console.log(calculateDeposit);
+    console.log("calculateDeposit: ", calculateDeposit);
   }
 
   return (

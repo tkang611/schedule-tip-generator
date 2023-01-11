@@ -15,15 +15,18 @@ const Baristas = () => {
       barista: barista,
       startTime: startTime,
       endTime: endTime,
-      breakTime: breakTime
+      breakTime: breakTime,
     };
     // check if there are already more than 5 baristas in the array
     if(baristas.length >= 5) {
-      alert('Too many baristas breh.')
+      alert('Too many baristas breh.');
     }
     // check if any of the fields are empty
     else if(newBarista.barista === "" || newBarista.startTime === "" || newBarista.endTime === "") {
-      alert('You left a field empty breh.')
+      alert('You left a field empty breh.');
+    }
+    else if(baristas.some(e => e.barista.includes(newBarista.barista))){
+      alert('You already have this barista breh.')
     }
     // if all checks out, add the new barista to the baristas array
     else {
@@ -33,7 +36,7 @@ const Baristas = () => {
 
   const baristaNames = ['Tim', 'Sung', 'Jess', 'Will', 'Eli', 'Nicole'];
   const times = ['6:30 AM', '7:45 AM', '8:00 AM', '8:15 AM', '9:00 AM', '12:00 PM', '12:30 PM', '1:30 PM', '5:30 PM'];
-  const breakTimes = [0, 30, 60];
+  const breakTimes = [0, 30, 60, 90];
 
   return(
     <div className="flex flex-col w-56">

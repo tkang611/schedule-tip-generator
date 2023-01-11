@@ -12,7 +12,7 @@ const Calculator = () => {
     <div className="flex flex-col">
       <Fields />
       <CalculateTip />
-      <Results tips={deposit}/>
+      <Results deposit={deposit}/>
     </div>
   )
 }

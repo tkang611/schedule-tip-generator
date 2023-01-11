@@ -1,16 +1,21 @@
 import * as React from "react";
 import { Typography } from "@mui/material";
 
-const Results = ({tips}) => {
+const Results = ({deposit}) => {
+
+  const {distribution} = deposit;
 
   return(
     <div className="mt-20 flex justify-center">
-      <Typography>
-        {`Total Cash Transactions are: ${tips.total}
-        Your total Card Tips are: ${tips.cardTotal}
-        Your total Cash Tips are: ${tips.cashTotal}
-        `}
-      </Typography>
+      {/* {() => {
+        for(let key in distribution){
+          return (
+            <Typography>
+              {`${key}: ${distribution[key]}`}
+            </Typography>  
+          )
+      }}} */}
+
     </div>
   )
 }

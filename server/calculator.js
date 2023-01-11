@@ -102,15 +102,19 @@ const lcSchedule = {
      let theTime = time.replace(/:/g, "")
      theTime = theTime.replace(/\s/g, "")
      console.log(theTime)
-     theNewTime = theTime.substring(0, theTime.length-2) + theTime.substring(theTime.length-2,theTime.length-1).toLowerCase();
-console.log(theNewTime)
+
+     const theNewTime = theTime.substring(0, theTime.length-2) + theTime.substring(theTime.length-2,theTime.length-1).toLowerCase();
+     console.log(theNewTime)
+
      let timeInNums = time.replace(/:/g, "")
      timeInNums = timeInNums.substring(0, timeInNums.length-3);
      console.log(timeInNums)
 
      const onlyHr = Math.floor(Number(timeInNums/100))
      console.log(onlyHr)
-     const amOrPm = onlyHr === 12 ? onlyHr + time.substring(time.length-1,time.length-2).toLowerCase() : time.substring(time.length-2, 6).toLowerCase();
+    //  const amOrPm = onlyHr === 12 ? onlyHr + time.substring(time.length-1,time.length-2).toLowerCase() : time.substring(time.length-2, 6).toLowerCase();
+    const amOrPm = onlyHr === 12 ? onlyHr + theNewTime.slice(theNewTime.length-1) : theNewTime.slice(theNewTime.length-1)
+
     console.log(amOrPm)
 
      let result;
@@ -122,7 +126,7 @@ console.log(theNewTime)
      return result;
    }
 
-   console.log(parseShifts2('6:30 PM'));
+  //  console.log(parseShifts2('6:30 PM'));
 
    function parseShifts (time){
      const timeInNums = time.slice(0, time.length-1);
@@ -153,7 +157,7 @@ console.log(theNewTime)
      return totalMins - br/60
    }
 
-   console.log(hrsPerShift2('7:45 AM', '12:30 PM', 30))
+   console.log(hrsPerShift2('6:30 AM', '12:00 PM', 30))
 
    function hrsPerShift (start, end, br){
      const startShift = parseShifts(start);
@@ -163,7 +167,7 @@ console.log(theNewTime)
      return totalMins - br/60
    };
 
-   console.log(hrsPerShift('745a', '1230p', 30))
+   console.log(hrsPerShift('630a', '1200p', 30))
    // 1am - 7pm
    // 1230p = 750 min
    // 530p = 1050 min
