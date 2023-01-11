@@ -1,17 +1,17 @@
 import * as React from 'react';
 
 const defaultState = {
-  total: 0,
-  cardTotal: 0,
-  cashTotal: 0
+  total: '',
+  cardTotal: '',
+  cashTotal: ''
 }
 
 const TotalsContext = React.createContext(defaultState);
 
 const TotalsContextProvider = ({children}) => {
-  const [total, setTotal] = React.useState(0);
-  const [cardTotal, setCardTotal] = React.useState(0);
-  const [cashTotal, setCashTotal] = React.useState(0);
+  const [total, setTotal] = React.useState('');
+  const [cardTotal, setCardTotal] = React.useState('');
+  const [cashTotal, setCashTotal] = React.useState('');
 
   return (
     <TotalsContext.Provider

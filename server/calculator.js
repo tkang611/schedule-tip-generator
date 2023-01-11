@@ -1,4 +1,5 @@
 const lcSchedule = {
+
     0 : [
       { name: 'Eli',
            shift: ['630a', '530p'],
@@ -96,11 +97,18 @@ const lcSchedule = {
      br is a number that indicates time in minutes for the duration of an employee's break.
    */
 
-   function parseShifts (time){
-     const timeInNums = time.slice(0, time.length-1);
-     const onlyHr = Math.floor(Number(timeInNums)/100)
-     const amOrPm = onlyHr === 12 ? onlyHr + time.slice(time.length-1) : time.slice(time.length-1)
-   
+
+   function parseShifts2(time){
+     let theTime = time.replace(/:/g, "")
+     theTime = theTime.replace(/\s/g, "")
+     theNewTime = theTime.substring(0, theTime.length-2) + theTime.substring(theTime.length-2,theTime.length-1).toLowerCase();
+
+     let timeInNums = time.replace(/:/g, "")
+     timeInNums = timeInNums.substring(0, timeInNums.length-3);
+
+     const onlyHr = Math.floor(Number(timeInNums/100))
+     const amOrPm = onlyHr === 12 ? onlyHr + time.substring(time.length-1,time.length-2).toLowerCase() : time.substring(time.length-2, 6).toLowerCase();
+
      let result;
      if (amOrPm === 'a' || amOrPm === '12p'){
        result = Number(timeInNums)
@@ -108,8 +116,36 @@ const lcSchedule = {
        result = Number(timeInNums) + 1200
      } 
      return result;
+   }
+
+   console.log(parseShifts2('6:30 PM'));
+
+   function parseShifts (time){
+     const timeInNums = time.slice(0, time.length-1);
+
+     console.log(time)
+     console.log(timeInNums)
+     const onlyHr = Math.floor(Number(timeInNums)/100)
+     console.log(onlyHr)
+     const amOrPm = onlyHr === 12 ? onlyHr + time.slice(time.length-1) : time.slice(time.length-1)
+     console.log(amOrPm)
+   
+     let result;
+     if (amOrPm === 'a' || amOrPm === '12p'){
+       result = Number(timeInNums)
+       console.log(result)
+     } else if (amOrPm === 'p' || amOrPm === '12a'){
+       result = Number(timeInNums) + 1200
+       console.log(result)
+
+     } 
+     return result;
    };
    
+   const hrsPerShift2 = (start, end, br) => {
+     const startShift = []
+   }
+
    function hrsPerShift (start, end, br){
      const startShift = parseShifts(start);
      const endShift = parseShifts(end);
@@ -149,13 +185,13 @@ const lcSchedule = {
      // array of employees by name, in order:
      const todaysNames = Object.keys(tipsBreakdown);
      // double check of the tip number vs cash taken out of register:
-     console.log(`total tips after 10%: ${tips}, cash taken from register after breakdown: ${tipsPerEmployee.reduce((a,b) => Number(Number(a + b).toFixed(2)), 0)}`);
+     // console.log(`total tips after 10%: ${tips}, cash taken from register after breakdown: ${tipsPerEmployee.reduce((a,b) => Number(Number(a + b).toFixed(2)), 0)}`);
      const employeeToTips = {};
      for (let i = 0; i < todaysNames.length; i++){
        employeeToTips[todaysNames[i]] = tipsPerEmployee[i];
      };
-     console.log(hrsArr)
-     console.log(employeeToTips)
+     // console.log(hrsArr)
+     // console.log(employeeToTips)
      const result = `Deposit: ${kevin}, Tips: ${tips}, Hourly: ${tipsPerHr}`;
      return result;
    }
