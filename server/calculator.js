@@ -101,13 +101,17 @@ const lcSchedule = {
    function parseShifts2(time){
      let theTime = time.replace(/:/g, "")
      theTime = theTime.replace(/\s/g, "")
+     console.log(theTime)
      theNewTime = theTime.substring(0, theTime.length-2) + theTime.substring(theTime.length-2,theTime.length-1).toLowerCase();
-
+console.log(theNewTime)
      let timeInNums = time.replace(/:/g, "")
      timeInNums = timeInNums.substring(0, timeInNums.length-3);
+     console.log(timeInNums)
 
      const onlyHr = Math.floor(Number(timeInNums/100))
+     console.log(onlyHr)
      const amOrPm = onlyHr === 12 ? onlyHr + time.substring(time.length-1,time.length-2).toLowerCase() : time.substring(time.length-2, 6).toLowerCase();
+    console.log(amOrPm)
 
      let result;
      if (amOrPm === 'a' || amOrPm === '12p'){
@@ -143,8 +147,13 @@ const lcSchedule = {
    };
    
    const hrsPerShift2 = (start, end, br) => {
-     const startShift = []
+     const startTime = parseShifts2(start);
+     const endTime = parseShifts2(end);
+     const totalMins = (Math.floor(endTime/100) + (endTime % 100)/60) - (Math.floor(startTime/100) + (startTime % 100)/60);
+     return totalMins - br/60
    }
+
+   console.log(hrsPerShift2('7:45 AM', '12:30 PM', 30))
 
    function hrsPerShift (start, end, br){
      const startShift = parseShifts(start);
@@ -154,6 +163,7 @@ const lcSchedule = {
      return totalMins - br/60
    };
 
+   console.log(hrsPerShift('745a', '1230p', 30))
    // 1am - 7pm
    // 1230p = 750 min
    // 530p = 1050 min
@@ -177,6 +187,7 @@ const lcSchedule = {
        tipsBreakdown[name] ? tipsBreakdown[name] += hrsPerShift(shiftBegin, shiftEnd, shiftBreak) : tipsBreakdown[name] = hrsPerShift(shiftBegin, shiftEnd, shiftBreak);
      }
      const hrsArr = Object.values(tipsBreakdown);
+     console.log(tipsBreakdown)
      const totalHrs = hrsArr.reduce((a,b) => a + b, 0)
      const tipsPerHr = Number(Number(tips/totalHrs).toFixed(2));
      
@@ -195,10 +206,69 @@ const lcSchedule = {
      const result = `Deposit: ${kevin}, Tips: ${tips}, Hourly: ${tipsPerHr}`;
      return result;
    }
+
+const baristas = [
+  { 
+    barista: 'Jess',
+    startTime: '6:30 AM',
+    endTime: '12:00 PM',
+    breakTime: 30
+  },
+  { 
+    barista: 'Eli',
+    startTime: '7:45 AM',
+    endTime: '12:30 PM',
+    breakTime: 0
+  },
+  { 
+    barista: 'Jess',
+    startTime: '12:30 PM',
+    endTime: '5:30 PM',
+    breakTime: 30
+  },
+  { 
+    barista: 'Eli',
+    startTime: '1:30 PM',
+    endTime: '5:30 PM',
+    breakTime: 0
+  },
+]
+
+const lcDeposit2 = (total, cardTotal, cashTotal) => {
+     const tipsBreakdown = {};
+     const kevin = Number(Number(total - (cardTotal * 0.9)).toFixed(2));
+     const tips = (cardTotal * 0.9) + cashTotal;
+     
+     baristas.map(e => {
+       const barista = e.barista
+       const startTime = e.startTime
+       const endTime = e.endTime
+       const breakTime = e.breakTime
+       console.log(typeof endTime, typeof breakTime)
+       tipsBreakdown[barista] ? tipsBreakdown[barista] += hrsPerShift2(startTime, endTime, breakTime) : tipsBreakdown[barista] = hrsPerShift2(startTime, endTime, breakTime);
+ 
+     })
+ 
+     const hrsArr = Object.values(tipsBreakdown);
+     console.log(tipsBreakdown)
+     const totalHrs = hrsArr.reduce((a,b) => a + b, 0)
+     const tipsPerHr = Number(Number(tips/totalHrs).toFixed(2));
+     
+     const tipsPerEmployee = hrsArr.map(el=> Number(Number(el*tipsPerHr).toFixed(2)));
+     const todaysNames = Object.keys(tipsBreakdown);
+     const employeeToTips = {};
+     for (let i = 0; i < todaysNames.length; i++){
+       employeeToTips[todaysNames[i]] = tipsPerEmployee[i];
+     };
+ 
+     const result = `Deposit: ${kevin}, Tips: ${tips}, Hourly: ${tipsPerHr}`;
+     return result;
+     }
    
    
+  console.log(lcDeposit(267.23, 199.52, 31.70))
    
-   console.log(lcDeposit(267.23, 199.52, 31.70))
+  console.log(lcDeposit2(267.23, 199.52, 31.70))
    
    
    

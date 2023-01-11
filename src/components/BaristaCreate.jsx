@@ -25,10 +25,6 @@ const Baristas = () => {
     else if(newBarista.barista === "" || newBarista.startTime === "" || newBarista.endTime === "") {
       alert('You left a field empty breh.')
     }
-    // check if the barista already exists in the baristas array
-    else if(baristas.some(e => e.barista.includes(newBarista.barista))){
-      alert('You already have this barista breh.')
-    }
     // if all checks out, add the new barista to the baristas array
     else {
       setBaristas((prev) => [...prev, newBarista]);   
