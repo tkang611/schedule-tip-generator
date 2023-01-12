@@ -8,7 +8,6 @@ const BaristaComponent = ({baristaComp}) => {
   const { baristas, setBaristas } = useBaristasContext();
 
   const handleDelete = (baristaName) => {
-    console.log('baristaId', baristaId)
     setBaristas(baristas.filter(e => e.barista !== baristaName));
   }
 
