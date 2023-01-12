@@ -1,21 +1,17 @@
 import * as React from "react";
-import { Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
 const Results = ({deposit}) => {
 
-  const {distribution} = deposit;
+  const {distribution} = deposit;   
 
   return(
-    <div className="mt-20 flex justify-center">
-      {/* {() => {
-        for(let key in distribution){
-          return (
-            <Typography>
-              {`${key}: ${distribution[key]}`}
-            </Typography>  
-          )
-      }}} */}
-
+    <div className="mt-20 flex flex-col items-center justify-center">
+      {Object.keys(distribution).map((e) => (
+        <Typography key={e} className= "mb-3">
+          {`${e}: ${distribution[e]}`}
+        </Typography>
+      ))}
     </div>
   )
 }
