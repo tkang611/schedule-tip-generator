@@ -98,7 +98,7 @@ const lcSchedule = {
    */
 
 
-   function parseShifts2(time){
+   function  (time){
      let theTime = time.replace(/:/g, "")
      theTime = theTime.replace(/\s/g, "")
      console.log(theTime)

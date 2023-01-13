@@ -47,7 +47,7 @@ const CalculateTip = () => {
     const kevin = await Number(Number(total - (cardTotal * 0.9)).toFixed(2));
     setKevinDeposit(kevin);
     const tips = await (cardTotal * 0.9) + Number(cashTotal);
-    setTotalTips(tips);
+    setTotalTips(tips.toFixed(2));
 
     
     baristas.map((e) => {
