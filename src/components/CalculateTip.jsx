@@ -1,14 +1,19 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
-import Results from './Results.jsx';
 import { useTotalsContext } from '../context/TotalsContext';
 import { useBaristasContext } from '../context/BaristasContext.jsx';
+import Deposit from './Deposit.jsx';
 
 const CalculateTip = () => {
 
   const { baristas } = useBaristasContext();
+  const { setDistribution } = useTotalsContext();
   const deposit = useTotalsContext();
-  const { distribution, setDistribution } = useTotalsContext();
+  const [showDeposit, setShowDeposit] = React.useState(false);
+
+  const [kevinDeposit, setKevinDeposit] = React.useState('');
+  const [totalTips, setTotalTips] = React.useState('');
+  const [tipsPerHour, setTipsPerHour] = React.useState('');
 
   const parseShifts = (time) => {
     let theTime = time.replace(/:/g, "")
@@ -37,10 +42,13 @@ const CalculateTip = () => {
     return totalMins - br/60;
   };
   
-  const lcDeposit = (total, cardTotal, cashTotal) => {
+  async function lcDeposit(total, cardTotal, cashTotal) {
     const tipsBreakdown = {};
-    const kevin = Number(Number(total - (cardTotal * 0.9)).toFixed(2));
-    const tips = (cardTotal * 0.9) + Number(cashTotal);
+    const kevin = await Number(Number(total - (cardTotal * 0.9)).toFixed(2));
+    setKevinDeposit(kevin);
+    const tips = await (cardTotal * 0.9) + Number(cashTotal);
+    setTotalTips(tips);
+
     
     baristas.map((e) => {
       const barista = e.barista;
@@ -52,7 +60,8 @@ const CalculateTip = () => {
 
     const hrsArr = Object.values(tipsBreakdown);
     const totalHrs = hrsArr.reduce((a,b) => a + b, 0)
-    const tipsPerHr = (tips/totalHrs).toFixed(2);
+    const tipsPerHr = await (tips/totalHrs).toFixed(2);
+    setTipsPerHour(tipsPerHr)
  
     const tipsPerEmployee = hrsArr.map(el=> Number(Number(el*tipsPerHr).toFixed(2)));
     const todaysNames = Object.keys(tipsBreakdown);
@@ -62,19 +71,21 @@ const CalculateTip = () => {
     };
 
     setDistribution(employeeToTips);
-    console.log('employee tips:', employeeToTips);
+
     const result = `Deposit: ${kevin}, Tips: ${tips}, Hourly: ${tipsPerHr}`;
     return result;
   }
 
-  const handleCalculate = () => {
-    const calculateDeposit = lcDeposit(deposit.total, deposit.cardTotal, deposit.cashTotal);
+  async function handleCalculate() {
+    const calculateDeposit = await lcDeposit(deposit.total, deposit.cardTotal, deposit.cashTotal);
+    setShowDeposit(true);
     console.log("calculateDeposit: ", calculateDeposit);
   }
 
   return (
-    <div className='flex justify-center mt-10'>
-      <Button variant="contained" onClick={() => handleCalculate()}>Calculate Tip</Button>
+    <div className='flex flex-col items-center justify-center mt-10'>
+      <Button sx={{width: '20%', marginBottom: 5}} variant="contained" onClick={() => handleCalculate()}>Calculate Tip</Button>
+      {showDeposit ? <Deposit kevin={kevinDeposit} tips={totalTips} hourly={tipsPerHour}/> : null}
     </div>
   )
 }

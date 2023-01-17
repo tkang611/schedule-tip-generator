@@ -3,6 +3,7 @@ import BaristaComponent from "./BaristaComponent.jsx"
 
 const BaristasList = ({baristasList}) => {
 
+  console.log(baristasList);
   return (
     <div className="flex flex-col w-[2%] items-center">
       <h1 className="flex justify-center mt-7 mb-5 text-xl"> Baristas</h1>
@@ -11,7 +12,7 @@ const BaristasList = ({baristasList}) => {
           <BaristaComponent baristaComp={barista} key={index}/>
         )
       })}
-    </div>
+    </div>  
   )
 }
 

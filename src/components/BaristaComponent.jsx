@@ -4,12 +4,13 @@ import { useBaristasContext } from "../context/BaristasContext.jsx";
 import DeleteIcon from '@mui/icons-material/Delete';
 import BaristaEdit from "./BaristaEdit.jsx";
 
-const BaristaComponent = ({baristaComp}) => {
+const BaristaComponent = ({baristaComp, index}) => {
   const { baristas, setBaristas } = useBaristasContext();
 
-  const handleDelete = (baristaName) => {
-    console.log('baristaId', baristaId)
-    setBaristas(baristas.filter(e => e.barista !== baristaName));
+  const handleDelete = (baristaName, index) => {
+    const baristasDelete = [...baristas];
+    baristasDelete.splice(index, 1);
+    setBaristas(baristasDelete);
   }
 
   return(
@@ -23,7 +24,7 @@ const BaristaComponent = ({baristaComp}) => {
             {baristaComp.startTime} - {baristaComp.endTime} - {baristaComp.breakTime} break.
           </Typography>
 
-          <IconButton onClick={() => handleDelete(baristaComp.barista)}>
+          <IconButton onClick={() => handleDelete(index)}>
             <DeleteIcon />
           </IconButton>
         </AccordionSummary>
