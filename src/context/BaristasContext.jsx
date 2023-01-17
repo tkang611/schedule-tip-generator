@@ -29,12 +29,11 @@ const defaultState = {
   ]
 }
 
-const BaristasContext = React.createContext(defaultState);
+export const BaristasContext = React.createContext(defaultState);
 
 const BaristasContextProvider = ({children}) => {
-  const [baristas, setBaristas] = React.useState([]);
-
-
+  const [baristas, setBaristas] = React.useState(defaultState.baristas);
+  
   return (
     <BaristasContext.Provider
       value={{

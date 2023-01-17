@@ -1,10 +1,10 @@
 import * as React from "react";
-import { useBaristasContext } from "../context/BaristasContext.jsx"
+import { useBaristasContext, BaristasContext } from "../context/BaristasContext.jsx"
 import { TextField, MenuItem, Button } from "@mui/material";
 
 const Baristas = () => {
 
-  const { baristas, setBaristas } = useBaristasContext();
+  const { baristas, setBaristas } = React.useContext(BaristasContext);
   const [barista, setBarista] = React.useState('');
   const [startTime, setStartTime] = React.useState('');
   const [endTime, setEndTime] = React.useState('');
@@ -25,9 +25,9 @@ const Baristas = () => {
     else if(newBarista.barista === "" || newBarista.startTime === "" || newBarista.endTime === "") {
       alert('You left a field empty breh.');
     }
-    else if(baristas.some(e => e.barista.includes(newBarista.barista))){
-      alert('You already have this barista breh.')
-    }
+    // else if(baristas.some(e => e.barista.includes(newBarista.barista))){
+    //   alert('You already have this barista breh.')
+    // }
     // if all checks out, add the new barista to the baristas array
     else {
       setBaristas((prev) => [...prev, newBarista]);   
